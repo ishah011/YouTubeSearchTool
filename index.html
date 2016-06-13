@@ -1,54 +1,69 @@
 <!DOCTYPE html>
-<head>
-	<!--TITLE-->
-	<title>YouTube Search Tool</title>
+<html class="no-js" lang="en">
+	<head>
+		<!--TITLE=================================================================-->
+		<title>YouTube Search Tool</title>
 
-	<!--CSS-->
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link rel="stylesheet" href="index.css">
-</head>
-<body>
-	<div class="container">
-		<div id="row Logo">YouTube Search Tool Logo</div>
-		<div class = "container graphs">
-			<div class="row headings" id="graph_heading">
-				<p> Select a Type of Graph </p>
+		<!--CSS===================================================================-->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="index.css">
+
+		<!--JAVASCRIPT============================================================-->
+		<script type="text/javascript" src="index.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div id="row Logo">YouTube Search Tool Logo</div>
+			<div class = "container graphs">
+				<div class="row headings" id="graph_heading">
+					<p> Select a Type of Graph </p>
+				</div>
+				<p class="row">
+					<img class="col-md-4 graph_specific" src='images/bar.jpg'>
+					<img class="col-md-4 graph_specific" src='images/Scatter plot.jpg'> 
+					<img class="col-md-4 graph_specific" src='images/line.jpg'>
+				</p>
+				<p class="row">
+					<img class="col-md-4 graph_specific" src='images/bubble.jpg'> 
+					<img class="col-md-4 graph_specific" src='images/pie chart.jpg'> 
+					<img class="col-md-4 graph_specific" src='images/table.jpg'>
+				</p>
 			</div>
-			<p>
+			<p class="container">
 				<div class="row">
-					<div class="col-md-4 graph_specific">Bar</div> 
-					<div class="col-md-4 graph_specific">Scatter Plot</div> 
-					<div class="col-md-4 graph_specific">Line</div>
+					<div class = "col-md-6 headings" id="x_axis">1st Axis (X-axis)</div> 
+					<div class="col-md-6 dropdown">
+					  <button onclick="myFunction()" class="dropbtn" id="drop1">Dropdown</button>
+					  <div id="myDropdown1" class="dropdown-content">
+					    <a href="#">Views</a>
+					    <a href="#">Ratings</a>
+					    <a href="#">Year Uploaded</a>
+					  </div>
+					</div>
 				</div>
 			</p>
-			<p>
+			<p class="container">
 				<div class="row">
-					<div class="col-md-4 graph_specific">Bubble</div> 
-					<div class="col-md-4 graph_specific">Pie Chart</div> 
-					<div class="col-md-4 graph_specific">Table</div>
+					<div class = "col-md-6 headings" id="y_axis">2nd Axis (Y-axis)</div> 
+					<div class="col-md-6 dropdown">
+					  <button onclick="myFunction1()" class="dropbtn" id="drop2">Dropdown</button>
+					  <div id="myDropdown2" class="dropdown-content">
+					    <a href="#">Views</a>
+					    <a href="#">Ratings</a>
+					    <a href="#">Year Uploaded</a>
+					  </div>
+					</div>
+				</div>
+			</p>
+			<p class="container">
+				<div class="row">
+					<div class = "col-md-4 headings" id="search">Search term:</div> 
+					<div class= "col-md-6 text"> Insert text box</div>
+					<button class="col-md-2" id="button" value="Submit">Submit</button>
 				</div>
 			</p>
 		</div>
-		<p class="container">
-			<div class="row">
-				<div class = "col-md-6 headings" id="x_axis">1st Axis (X-axis)</div> 
-				<div class= "col-md-6 dropdowns"> Insert drop down</div>
-			</div>
-		</p>
-		<p class="container">
-			<div class="row">
-				<div class = "col-md-6 headings" id="y_axis">2nd Axis (Y-axis)</div> 
-				<div class= "col-md-6 dropdowns"> Insert drop down</div>
-			</div>
-		</p>
-		<p class="container">
-			<div class="row">
-				<div class = "col-md-4 headings" id="search">Search term:</div> 
-				<div class= "col-md-6 text"> Insert text box</div>
-				<button class="col-md-2" id="button" value="Submit">Submit</div>
-			</div>
-		</p>
-	</div>
-
-</body>
+		<script type="text/javascript" src="index.js"></script>
+	</body>
+</html>
