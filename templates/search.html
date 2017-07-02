@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% block body %}
+	<form action="{{ url_for('index') }}" method=post class="container">
+		<div class = "container graphs">
+			<!--GRAPH SELECTION===================================================-->
+			<div class="headings row" id="graph_heading">
+				<p> Select a Type of Graph: </p>
+			</div>
+
+			<div class="row text">
+				<div class = "col-md-6 headings" id="graph_heading">Type of Graph</div> 
+				<div class="col-md-6 dropdown">
+					<select class="chosen-select col-md-6" data-placeholder="Select Your Options" name='graphselection'>
+				    <option value="Bar">Bar</option>
+				    <option value="Scatter">Scatter</option>
+				    <option value="Line">Line</option>
+				    <option value="Bubble">Bubble</option>
+				    <option value="Pie">Pie</option>
+				    <option value="Table">Table</option>
+				  </select>
+				</div>
+			</div>
+
+		</div>
+		<p class="container">
+			<!--CHOOSING AXES=====================================================-->
+			<div class="row text">
+				<div class = "col-md-6 headings" id="x_axis">1st Axis (X-axis)</div> 
+				<div class="col-md-6 dropdown">
+					<select class="chosen-select col-md-6" data-placeholder="Select Your Options" name="xselection">
+				    <option value="Views">Views</option>
+				    <option value="Ratings">Ratings</option>
+				    <option value="Year">Year Uploaded</option>
+				  </select>
+				</div>
+			</div>
+			<p class="row text">
+				<div class = "col-md-6 headings" id="y_axis">2nd Axis (Y-axis)</div> 
+				<div class="col-md-6 dropdown">
+					<select class="chosen-select col-md-6" data-placeholder="Select Your Options" name="yselection">
+					  <option value="Views">Views</option>
+					  <option value="Ratings">Ratings</option>
+					  <option value="Year">Year Uploaded</option>
+					</select>
+				</div>
+			</p>
+			<!--SEARCH QUERY======================================================-->
+			<p class="row text">
+				<div class = "col-md-6 headings" id="search">Search term:</div> 
+				<input type="text" class="col-md-6" name=search>
+			</p>
+			<p class="row text">	
+				<div class="col-md-2"></div>
+				<div class="col-md-2"></div>
+				<div class="col-md-2"></div>
+				<button class="col-md-2" id="button" value="Submit" name=submit>Submit</button>
+			</p>
+		</p>
+	</form>
+{% endblock %}

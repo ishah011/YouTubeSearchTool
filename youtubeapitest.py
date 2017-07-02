@@ -17,7 +17,7 @@ YOUTUBE_API_VERSION = "v3"
 youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
 
 query = raw_input('What would you like to search for?')
-sorting = raw_input('What would you like to sort the results by, rating, views, or year uploaded?')
+sorting = raw_input('What would you like to sort the results by, rating, views, or year uploaded?').lower()
 
 if(sorting == 'rating'):
 	sort = "rating"
@@ -26,7 +26,7 @@ elif(sorting == 'views'):
 elif(sorting == 'year uploaded'):
 	sort = "date"
 else:
-	print "The input is not rating, views, or year uploaded. Input is case-sensitive. Using default value of rating."
+	print "The input is not rating, views, or year uploaded. Using default value of rating."
 	sort = "rating"
 
 # Call the search.list method to retrieve results matching the specified

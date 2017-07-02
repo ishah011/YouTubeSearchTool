@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+{% block body %}
+	<p> X-axis values: </p>
+	{% for xitem in xrv %}
+	{{xitem}}
+	{%endfor%}
+	<p> Y-axis values:</p>
+	{% for yitem in yrv %}
+	{{yitem}}
+	{%endfor%}
+{% endblock %}

@@ -1,0 +1,5 @@
+Client ID: 880262309566-lk6d2flce6v13egj7qg5bjl4mjudk76g.apps.googleusercontent.com
+
+Client Secret: TaW7OKN_12lEf2lgz-CL835f
+
+Non-OAuth API key: AIzaSyB-bxt14EM4OME397miur95Wl94PVa3oT8
