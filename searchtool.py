@@ -38,40 +38,40 @@ def youtubefunc(query, sort, rv):
 		rv.append(video["snippet"]["title"] + " :: " + video["snippet"]["channelTitle"])
 
 @app.route('/', methods=['GET','POST'])
-def index(xrv=xrv):
+def index(xrv=xrv,yrv=yrv):
 	if request.method == 'POST':
 		query = request.form["search"]
-		if request.form["xselection"] is "Ratings":
+		xval = request.form["xselection"].encode("ascii")
+		yval = request.form["yselection"].encode("ascii")
+		if xval == "Ratings":
 			xsort = "rating"
-			xrv.append(1)
-		elif request.form["xselection"] is "Views":
+		elif xval == "Views":
 			xsort = "viewCount"
-			xrv.append(2)
-		elif request.form["xselection"] is "Year":
+		elif xval == "Year":
 			xsort = "date"
-			xrv.append(3)
 		else:
 			xsort = "rating"
-			xrv.append(4)
-		if request.form["yselection"] is "Ratings":
+
+		if yval == "Ratings":
 			ysort = "rating"
-			yrv.append(1)
-		elif request.form["yselection"] is "Views":
+		elif yval == "Views":
 			ysort = "viewCount"
-			yrv.append(2)
-		elif request.form["yselection"] is "Year":
+		elif yval == "Year":
 			ysort = "date"
-			yrv.append(3)
 		else:
 			ysort = "rating"
-			yrv.append(4)
 
-		# youtubefunc(query, xsort, xrv)
-		# youtubefunc(query, ysort, yrv)
+		youtubefunc(query, xsort, xrv)
+		youtubefunc(query, ysort, yrv)
+
 		return redirect(url_for('result'))
 	else:
+		yrv = []
+		xrv = []
+
 		return render_template('search.html',xrv=xrv, yrv=yrv)
 
 @app.route('/result', methods=['GET'])
 def result(xrv=xrv, yrv=yrv):
+
 	return render_template('result.html',xrv=xrv, yrv=yrv)
