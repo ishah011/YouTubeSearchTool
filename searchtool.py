@@ -32,10 +32,12 @@ def youtubefunc(query, sort, rv):
 	  type="video",
 	  order= sort
 	).execute()
-
 	# search_response["items"][0]["snippet"]["title"]
 	for video in search_rating_response["items"]:
-		rv.append(video["snippet"]["title"] + " :: " + video["snippet"]["channelTitle"])
+		values = []
+		values.append("https://www.youtube.com/watch?v="+video["id"]["videoId"])
+		values.append(video["snippet"]["title"] + ' :: ' + video["snippet"]["channelTitle"])
+		rv.append(values)
 
 @app.route('/', methods=['GET','POST'])
 def index(xrv=xrv,yrv=yrv):
@@ -66,8 +68,8 @@ def index(xrv=xrv,yrv=yrv):
 
 		return redirect(url_for('result'))
 	else:
-		yrv = []
-		xrv = []
+		del yrv[:]
+		del xrv[:]
 
 		return render_template('search.html',xrv=xrv, yrv=yrv)
 

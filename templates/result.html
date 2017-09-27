@@ -2,10 +2,10 @@
 {% block body %}
 	<p> X-axis values: </p>
 	{% for xitem in xrv %}
-	{{xitem}} <br>
+	<a href = {{xitem[0]}} target="_blank">{{xitem[1]}}</a> <br>
 	{%endfor%}
 	<p> Y-axis values:</p>
 	{% for yitem in yrv %}
-	{{yitem}} <br>
+	<a href = {{yitem[0]}} target="_blank">{{yitem[1]}}</a> <br>
 	{%endfor%}
 {% endblock %}
