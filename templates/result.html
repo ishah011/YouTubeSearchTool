@@ -1,5 +1,8 @@
 {% extends "index.html" %}
 {% block body %}
+	{% if error != "" %}
+		{{error}}
+	{% endif %}
 	<!-- <p> X-axis values: </p>
 	{% for xitem in xrv %}
 	<a href = {{xitem[0]}} target="_blank">{{xitem[1]}}</a> <br>
@@ -9,4 +12,7 @@
 	<a href = {{yitem[0]}} target="_blank">{{yitem[1]}}</a> <br>
 	{%endfor%} -->
 	{{result|safe}}
+	<!-- {% for xitem in result %}
+		{{xitem}}<br>
+	{%endfor%} -->
 {% endblock %}

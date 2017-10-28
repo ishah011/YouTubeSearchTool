@@ -1,3 +1,4 @@
+from __future__ import division
 from flask import Flask
 from flask import render_template, request, url_for, redirect
 from apiclient import discovery
@@ -38,21 +39,44 @@ def youtubefunc(query, sort, rv):
 	# Call the search.list method to retrieve results matching the specified
 	# query term.
 	search_rating_response = youtube.search().list(
-	  q= query,
-	  part="snippet",
-	  maxResults=5,
-	  type="video",
-	  order= sort
+		q= query,
+		part="snippet",
+		maxResults=5,
+		type="video",
+		order= sort
 	).execute()
 	# search_response["items"][0]["snippet"]["title"]
+	# for video in search_rating_response["items"]:
+	# 	values = []
+	# 	values.append("https://www.youtube.com/watch?v="+video["id"]["videoId"])
+	# 	values.append(video["snippet"]["title"] + ' :: ' + video["snippet"]["channelTitle"])
+	# 	rv.append(values)
+	id_list = []
 	for video in search_rating_response["items"]:
-		values = []
-		values.append("https://www.youtube.com/watch?v="+video["id"]["videoId"])
-		values.append(video["snippet"]["title"] + ' :: ' + video["snippet"]["channelTitle"])
-		rv.append(values)
+		id_list.append(video["id"]["videoId"])
+	
+	for video_id in id_list:
+		video_lookup = youtube.videos().list(
+			part='statistics',
+			id=video_id
+		).execute()
+		for video in video_lookup["items"]:
+			#likeCount, dislikeCount, viewCount
+			#need to figure out how to get the year uploaded
+			if sort == "rating":
+				likes = int(video['statistics']['likeCount'])
+				dislikes = int(video['statistics']['dislikeCount'])
+				rating = (likes/(likes+dislikes))*100
+				rv.append(rating) 
+			elif sort == "viewCount":
+				rv.append(int(video['statistics']['viewCount']))
+			else:
+				return render_template('search.html',xrv=xrv, yrv=yrv, error="Error retrieving stats")
+
 
 @app.route('/', methods=['GET','POST'])
 def index(xrv=xrv,yrv=yrv):
+	error = ""
 	if request.method == 'POST':
 		query = request.form["search"]
 		xval = request.form["xselection"].encode("ascii")
@@ -83,17 +107,18 @@ def index(xrv=xrv,yrv=yrv):
 		del yrv[:]
 		del xrv[:]
 
-		return render_template('search.html',xrv=xrv, yrv=yrv)
+		return render_template('search.html',xrv=xrv, yrv=yrv, error=error)
 
 @app.route('/result', methods=['GET'])
 def result(xrv=xrv, yrv=yrv):
 	data = [go.Scatter(
 			x= xrv,
-   			y= yrv
+			y= yrv
 		)] #this data actually contains titles and channels, not the views/ratings/year uploaded, which is what we want for the scatter plot
 	layout = go.Layout(
-	    title='Results',
+		title='Results',
 	)
 	fig = go.Figure(data=data, layout=layout)
 	result = tls.get_embed(py.plot(fig, filename='results', fileopt = 'overwrite'))
 	return render_template('result.html',result=result)
+	#return render_template('result.html', result=xrv)
