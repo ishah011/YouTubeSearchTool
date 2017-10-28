@@ -4,6 +4,13 @@ from apiclient import discovery
 from googleapiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
+import plotly
+import plotly.plotly as py
+import plotly.graph_objs as go
+import plotly.tools as tls
+
+# set FLASK_APP = searchtool.py
+#python -m flask run
 
 app = Flask(__name__)
 
@@ -15,6 +22,11 @@ app = Flask(__name__)
 DEVELOPER_KEY = "AIzaSyB-bxt14EM4OME397miur95Wl94PVa3oT8"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
+
+PLOTLY_USERNAME = 'ishah011'
+PLOTLY_API_KEY = 'c1DyyepqDVUbvTIDfkqK'
+
+plotly.tools.set_credentials_file(username=PLOTLY_USERNAME, api_key=PLOTLY_API_KEY)
 
 xrv = []
 yrv = []
@@ -75,5 +87,13 @@ def index(xrv=xrv,yrv=yrv):
 
 @app.route('/result', methods=['GET'])
 def result(xrv=xrv, yrv=yrv):
-
-	return render_template('result.html',xrv=xrv, yrv=yrv)
+	data = [go.Scatter(
+			x= xrv,
+   			y= yrv
+		)] #this data actually contains titles and channels, not the views/ratings/year uploaded, which is what we want for the scatter plot
+	layout = go.Layout(
+	    title='Results',
+	)
+	fig = go.Figure(data=data, layout=layout)
+	result = tls.get_embed(py.plot(fig, filename='results', fileopt = 'overwrite'))
+	return render_template('result.html',result=result)

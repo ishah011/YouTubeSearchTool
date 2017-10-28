@@ -1,11 +1,12 @@
 {% extends "index.html" %}
 {% block body %}
-	<p> X-axis values: </p>
+	<!-- <p> X-axis values: </p>
 	{% for xitem in xrv %}
 	<a href = {{xitem[0]}} target="_blank">{{xitem[1]}}</a> <br>
 	{%endfor%}
 	<p> Y-axis values:</p>
 	{% for yitem in yrv %}
 	<a href = {{yitem[0]}} target="_blank">{{yitem[1]}}</a> <br>
-	{%endfor%}
+	{%endfor%} -->
+	{{result|safe}}
 {% endblock %}
